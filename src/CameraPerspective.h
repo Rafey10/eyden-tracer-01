@@ -24,13 +24,26 @@ public:
 		, m_dir(dir)
 		, m_up(up)
 	{
-		// --- PUT YOUR CODE HERE ---
+		m_aspect = (float)resolution.width/resolution.height;
+		m_zAxis = normalize(m_dir);
+		m_yAxis = normalize(-1*m_up);
+		m_xAxis = normalize(m_dir.cross(m_up));
+		m_focus = 1/tan((angle/2)*(Pif/180));
 	}
 	virtual ~CCameraPerspective(void) = default;
 
 	virtual bool InitRay(float x, float y, Ray& ray) override
 	{
-		// --- PUT YOUR CODE HERE ---
+		float ndcx = (float)(x + 0.5)/getResolution().width;
+		float ndcy = (float)(y + 0.5)/getResolution().height;
+		
+		float sscx = (2* ndcx -1) * m_aspect;
+		float sscy = (2* ndcx -1);
+		
+		ray.org = m_pos;
+		ray.dir = normalize(sscx*m_xAxis + sscy*m_yAxis + m_dir*m_focus);
+		ray.t = std::numeric_limits<float>::max();
+		
 		return true;
 	}
 
