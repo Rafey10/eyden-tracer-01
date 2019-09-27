@@ -30,7 +30,7 @@ public:
 		float b = 2*ray.dir.dot(d);
 		float c = d.dot(d) - (m_radius*m_radius);
 		
-		float det = (b*b) - 4*a*c;
+		float det = (b*b) - (4*a*c);
 		
 		if (det<0){
 			return false;
