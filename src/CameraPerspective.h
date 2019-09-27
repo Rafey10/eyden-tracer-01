@@ -38,7 +38,7 @@ public:
 		float ndcy = (float)(y + 0.5)/getResolution().height;
 		
 		float sscx = (2* ndcx -1) * m_aspect;
-		float sscy = (2* ndcx -1);
+		float sscy = (2* ndcy -1);
 		
 		ray.org = m_pos;
 		ray.dir = normalize(sscx*m_xAxis + sscy*m_yAxis + m_dir*m_focus);
